@@ -129,29 +129,125 @@ dev/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/build
 .PHONY : dev/fast
 
-src/main.o: src/main.cpp.o
+src/board.o: src/board.cc.o
+.PHONY : src/board.o
+
+# target to build an object file
+src/board.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/board.cc.o
+.PHONY : src/board.cc.o
+
+src/board.i: src/board.cc.i
+.PHONY : src/board.i
+
+# target to preprocess a source file
+src/board.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/board.cc.i
+.PHONY : src/board.cc.i
+
+src/board.s: src/board.cc.s
+.PHONY : src/board.s
+
+# target to generate assembly for a file
+src/board.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/board.cc.s
+.PHONY : src/board.cc.s
+
+src/board_display.o: src/board_display.cc.o
+.PHONY : src/board_display.o
+
+# target to build an object file
+src/board_display.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/board_display.cc.o
+.PHONY : src/board_display.cc.o
+
+src/board_display.i: src/board_display.cc.i
+.PHONY : src/board_display.i
+
+# target to preprocess a source file
+src/board_display.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/board_display.cc.i
+.PHONY : src/board_display.cc.i
+
+src/board_display.s: src/board_display.cc.s
+.PHONY : src/board_display.s
+
+# target to generate assembly for a file
+src/board_display.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/board_display.cc.s
+.PHONY : src/board_display.cc.s
+
+src/main.o: src/main.cc.o
 .PHONY : src/main.o
 
 # target to build an object file
-src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/main.cpp.o
-.PHONY : src/main.cpp.o
+src/main.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/main.cc.o
+.PHONY : src/main.cc.o
 
-src/main.i: src/main.cpp.i
+src/main.i: src/main.cc.i
 .PHONY : src/main.i
 
 # target to preprocess a source file
-src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/main.cpp.i
-.PHONY : src/main.cpp.i
+src/main.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/main.cc.i
+.PHONY : src/main.cc.i
 
-src/main.s: src/main.cpp.s
+src/main.s: src/main.cc.s
 .PHONY : src/main.s
 
 # target to generate assembly for a file
-src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/main.cpp.s
-.PHONY : src/main.cpp.s
+src/main.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/main.cc.s
+.PHONY : src/main.cc.s
+
+src/piece.o: src/piece.cc.o
+.PHONY : src/piece.o
+
+# target to build an object file
+src/piece.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/piece.cc.o
+.PHONY : src/piece.cc.o
+
+src/piece.i: src/piece.cc.i
+.PHONY : src/piece.i
+
+# target to preprocess a source file
+src/piece.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/piece.cc.i
+.PHONY : src/piece.cc.i
+
+src/piece.s: src/piece.cc.s
+.PHONY : src/piece.s
+
+# target to generate assembly for a file
+src/piece.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/piece.cc.s
+.PHONY : src/piece.cc.s
+
+src/piece_display_manager.o: src/piece_display_manager.cc.o
+.PHONY : src/piece_display_manager.o
+
+# target to build an object file
+src/piece_display_manager.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/piece_display_manager.cc.o
+.PHONY : src/piece_display_manager.cc.o
+
+src/piece_display_manager.i: src/piece_display_manager.cc.i
+.PHONY : src/piece_display_manager.i
+
+# target to preprocess a source file
+src/piece_display_manager.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/piece_display_manager.cc.i
+.PHONY : src/piece_display_manager.cc.i
+
+src/piece_display_manager.s: src/piece_display_manager.cc.s
+.PHONY : src/piece_display_manager.s
+
+# target to generate assembly for a file
+src/piece_display_manager.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/piece_display_manager.cc.s
+.PHONY : src/piece_display_manager.cc.s
 
 # Help Target
 help:
@@ -162,9 +258,21 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... dev"
+	@echo "... src/board.o"
+	@echo "... src/board.i"
+	@echo "... src/board.s"
+	@echo "... src/board_display.o"
+	@echo "... src/board_display.i"
+	@echo "... src/board_display.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/piece.o"
+	@echo "... src/piece.i"
+	@echo "... src/piece.s"
+	@echo "... src/piece_display_manager.o"
+	@echo "... src/piece_display_manager.i"
+	@echo "... src/piece_display_manager.s"
 .PHONY : help
 
 
