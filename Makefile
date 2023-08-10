@@ -225,29 +225,29 @@ src/piece.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/piece.cc.s
 .PHONY : src/piece.cc.s
 
-src/piece_display_manager.o: src/piece_display_manager.cc.o
-.PHONY : src/piece_display_manager.o
+src/piece_display.o: src/piece_display.cc.o
+.PHONY : src/piece_display.o
 
 # target to build an object file
-src/piece_display_manager.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/piece_display_manager.cc.o
-.PHONY : src/piece_display_manager.cc.o
+src/piece_display.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/piece_display.cc.o
+.PHONY : src/piece_display.cc.o
 
-src/piece_display_manager.i: src/piece_display_manager.cc.i
-.PHONY : src/piece_display_manager.i
+src/piece_display.i: src/piece_display.cc.i
+.PHONY : src/piece_display.i
 
 # target to preprocess a source file
-src/piece_display_manager.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/piece_display_manager.cc.i
-.PHONY : src/piece_display_manager.cc.i
+src/piece_display.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/piece_display.cc.i
+.PHONY : src/piece_display.cc.i
 
-src/piece_display_manager.s: src/piece_display_manager.cc.s
-.PHONY : src/piece_display_manager.s
+src/piece_display.s: src/piece_display.cc.s
+.PHONY : src/piece_display.s
 
 # target to generate assembly for a file
-src/piece_display_manager.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/piece_display_manager.cc.s
-.PHONY : src/piece_display_manager.cc.s
+src/piece_display.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/piece_display.cc.s
+.PHONY : src/piece_display.cc.s
 
 # Help Target
 help:
@@ -270,9 +270,9 @@ help:
 	@echo "... src/piece.o"
 	@echo "... src/piece.i"
 	@echo "... src/piece.s"
-	@echo "... src/piece_display_manager.o"
-	@echo "... src/piece_display_manager.i"
-	@echo "... src/piece_display_manager.s"
+	@echo "... src/piece_display.o"
+	@echo "... src/piece_display.i"
+	@echo "... src/piece_display.s"
 .PHONY : help
 
 

@@ -1,10 +1,11 @@
-#include <iostream>
-#include "../header/board_display.h"
 #include "../header/board.h"
+#include "../header/board_display.h"
+#include <iostream>
 
 int main() {
   sf::RenderWindow window(sf::VideoMode(800, 800), "YACE");
-  BoardDisplay board_display;
+  Board board;
+  BoardDisplay board_display(board);
 
   // run program as long as the window is open
   while (window.isOpen()) {
@@ -18,8 +19,8 @@ int main() {
 
     window.clear();
 
-    // Draw
-    board_display.DrawEach(window);
+    // Draw squares and pieces
+    board_display.DrawBoard(window, board);
 
     window.display();
   }

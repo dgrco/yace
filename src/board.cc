@@ -86,3 +86,7 @@ Piece *Board::GetBoardFromFEN(std::string fen) {
   }
   return squares;
 }
+
+Piece *Board::get_squares() {
+  return this->squares_;
+}

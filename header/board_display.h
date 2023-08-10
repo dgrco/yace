@@ -3,15 +3,20 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include "board.h"
+#include "piece_display.h"
 
 class BoardDisplay {
 private:
+  std::vector<std::tuple<PieceDisplay, int>> pieces_;
   sf::RectangleShape *squares_[64];
 
 public:
-  BoardDisplay();
-  void DrawEach(sf::RenderWindow& window);
+  BoardDisplay(Board &board);
   ~BoardDisplay();
+
+  // Draws each square and piece on the board
+  void DrawBoard(sf::RenderWindow &window, Board &board);
 };
 
 #endif

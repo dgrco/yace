@@ -10,7 +10,7 @@ add_executable(${PROJECT_NAME}
   src/board_display.cc
   src/board.cc
   src/piece.cc
-  src/piece_display_manager.cc
+  src/piece_display.cc
 )
 
 target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-system)
