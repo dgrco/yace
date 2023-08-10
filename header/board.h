@@ -14,6 +14,7 @@ public:
   void SetPiece(int position, Piece piece);
   Piece GetPiece(int position);
   Piece *get_squares();
+  void set_squares(Piece *squares);
   // Returns an array of pieces/squares in ascending order starting from a0
   // given a FEN string
   Piece *GetBoardFromFEN(std::string fen);

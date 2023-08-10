@@ -5,7 +5,9 @@
 int main() {
   sf::RenderWindow window(sf::VideoMode(800, 800), "YACE");
   Board board;
-  BoardDisplay board_display(board);
+  board.set_squares(board.GetBoardFromFEN(
+      "rn1qkbnr/ppp1pppp/8/3p4/3P2b1/2N5/PPP1PPPP/R1BQKBNR w KQkq - 0 1"));
+      BoardDisplay board_display(board);
 
   // run program as long as the window is open
   while (window.isOpen()) {

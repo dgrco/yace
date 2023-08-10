@@ -18,66 +18,49 @@ Piece *Board::GetBoardFromFEN(std::string fen) {
   fen = fen.substr(0, fen.find_first_of(' '));
 
   int idx = 0;
-  int rank = 0;
   int space_counter = 0;
-  for (int i = fen.length() - 1; i >= 0; i--) {
+  for (int i = 0; i < fen.length(); i++) {
     switch (fen[i]) {
     case 'r':
-      squares[rank * 8 + (7 - idx % 8)] = Piece(Black, Rook);
-      idx++;
+      squares[idx++] = Piece(Black, Rook);
       break;
     case 'n':
-      squares[rank * 8 + (7 - idx % 8)] = Piece(Black, Knight);
-      idx++;
+      squares[idx++] = Piece(Black, Knight);
       break;
     case 'b':
-      squares[rank * 8 + (7 - idx % 8)] = Piece(Black, Bishop);
-      idx++;
+      squares[idx++] = Piece(Black, Bishop);
       break;
     case 'q':
-      squares[rank * 8 + (7 - idx % 8)] = Piece(Black, Queen);
-      idx++;
+      squares[idx++] = Piece(Black, Queen);
       break;
     case 'k':
-      squares[rank * 8 + (7 - idx % 8)] = Piece(Black, King);
-      idx++;
+      squares[idx++] = Piece(Black, King);
       break;
     case 'p':
-      squares[rank * 8 + (7 - idx % 8)] = Piece(Black, Pawn);
-      idx++;
+      squares[idx++] = Piece(Black, Pawn);
       break;
     case 'R':
-      squares[rank * 8 + (7 - idx % 8)] = Piece(White, Rook);
-      idx++;
+      squares[idx++] = Piece(White, Rook);
       break;
     case 'N':
-      squares[rank * 8 + (7 - idx % 8)] = Piece(White, Knight);
-      idx++;
+      squares[idx++] = Piece(White, Knight);
       break;
     case 'B':
-      squares[rank * 8 + (7 - idx % 8)] = Piece(White, Bishop);
-      idx++;
+      squares[idx++] = Piece(White, Bishop);
       break;
     case 'Q':
-      squares[rank * 8 + (7 - idx % 8)] = Piece(White, Queen);
-      idx++;
+      squares[idx++] = Piece(White, Queen);
       break;
     case 'K':
-      squares[rank * 8 + (7 - idx % 8)] = Piece(White, King);
-      idx++;
+      squares[idx++] = Piece(White, King);
       break;
     case 'P':
-      squares[rank * 8 + (7 - idx % 8)] = Piece(White, Pawn);
-      idx++;
-      break;
-    case '/':
-      rank++;
+      squares[idx++] = Piece(White, Pawn);
       break;
     case '1' ... '8':
       int digit_value = fen[i] - '0'; // converts char to int
       while (space_counter < digit_value) {
-        squares[idx + (7 - idx % 8)] = Piece(NoColor, NoType);
-        idx++;
+        squares[idx++] = Piece(NoColor, NoType);
         space_counter++;
       }
       space_counter = 0;
@@ -89,4 +72,8 @@ Piece *Board::GetBoardFromFEN(std::string fen) {
 
 Piece *Board::get_squares() {
   return this->squares_;
+}
+  
+void Board::set_squares(Piece *squares) {
+  this->squares_ = squares;
 }
