@@ -1,16 +1,17 @@
 #include "../header/piece.h"
 
-Piece::Piece(Color color, Type type) {
-  this->color_ = color;
-  this->type_ = type;
+Piece::Piece(Color color, Type type, int position) {
+  color_ = color;
+  type_ = type;
+  position_ = position;
 }
 
-void Piece::set_position(int position) { this->position_ = position; }
+void Piece::set_position(int position) { position_ = position; }
 
-int Piece::get_position() { return this->position_; }
+int Piece::get_position() { return position_; }
 
-bool Piece::IsType(Type type) { return this->type_ == type; }
+bool Piece::IsType(Type type) { return type_ == type; }
 
-bool Piece::IsColor(Color color) { return this->color_ == color; }
+bool Piece::IsColor(Color color) { return color_ == color; }
 
-int Piece::GetValue() { return this->color_ & 0b11000 | this->type_ & 0b00111; }
+int Piece::GetValue() { return color_ & 0b11000 | type_ & 0b00111; }

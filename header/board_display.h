@@ -16,7 +16,9 @@ public:
   ~BoardDisplay();
 
   // Draws each square and piece on the board
-  void DrawBoard(sf::RenderWindow &window, Board &board);
+  void DrawBoard(sf::RenderWindow &window);
+  void DrawSquares();
+  void Highlight(sf::RenderWindow &window, int position);
 };
 
 #endif

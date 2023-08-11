@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics/Image.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+
 enum Type {
   NoType = 0,
   Pawn = 1,
@@ -26,7 +27,7 @@ private:
   int position_;
   
 public:
-  Piece(Color, Type);
+  Piece(Color, Type, int);
   void set_position(int);
   int get_position();
   bool IsType(Type);

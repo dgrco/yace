@@ -177,6 +177,30 @@ src/board_display.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/board_display.cc.s
 .PHONY : src/board_display.cc.s
 
+src/input_handler.o: src/input_handler.cc.o
+.PHONY : src/input_handler.o
+
+# target to build an object file
+src/input_handler.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/input_handler.cc.o
+.PHONY : src/input_handler.cc.o
+
+src/input_handler.i: src/input_handler.cc.i
+.PHONY : src/input_handler.i
+
+# target to preprocess a source file
+src/input_handler.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/input_handler.cc.i
+.PHONY : src/input_handler.cc.i
+
+src/input_handler.s: src/input_handler.cc.s
+.PHONY : src/input_handler.s
+
+# target to generate assembly for a file
+src/input_handler.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/input_handler.cc.s
+.PHONY : src/input_handler.cc.s
+
 src/main.o: src/main.cc.o
 .PHONY : src/main.o
 
@@ -264,6 +288,9 @@ help:
 	@echo "... src/board_display.o"
 	@echo "... src/board_display.i"
 	@echo "... src/board_display.s"
+	@echo "... src/input_handler.o"
+	@echo "... src/input_handler.i"
+	@echo "... src/input_handler.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

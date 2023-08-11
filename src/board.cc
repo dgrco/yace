@@ -1,20 +1,24 @@
 #include "../header/board.h"
+#include <iostream>
 
 Board::Board() {
-  this->squares_ = GetBoardFromFEN(
+  squares_ = GetBoardFromFEN(
       "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
 }
 
-Board::~Board() { free(this->squares_); }
-
-void Board::SetPiece(int position, Piece piece) {
-  this->squares_[position] = piece;
+Board::~Board() {
+  for (int i = 0; i < 64; i++) {
+    delete squares_[i];
+  }
+  delete[] squares_;
 }
 
-Piece Board::GetPiece(int position) { return this->squares_[position]; }
+void Board::SetPiece(int position, Piece *piece) { squares_[position] = piece; }
 
-Piece *Board::GetBoardFromFEN(std::string fen) {
-  Piece *squares = (Piece *)malloc(64 * sizeof(Piece));
+Piece *Board::GetPiece(int position) { return squares_[position]; }
+
+Piece **Board::GetBoardFromFEN(std::string fen) {
+  Piece **squares = new Piece *[64];
   fen = fen.substr(0, fen.find_first_of(' '));
 
   int idx = 0;
@@ -22,45 +26,58 @@ Piece *Board::GetBoardFromFEN(std::string fen) {
   for (int i = 0; i < fen.length(); i++) {
     switch (fen[i]) {
     case 'r':
-      squares[idx++] = Piece(Black, Rook);
+      squares[idx] = new Piece(Black, Rook, idx);
+      idx++;
       break;
     case 'n':
-      squares[idx++] = Piece(Black, Knight);
+      squares[idx] = new Piece(Black, Knight, idx);
+      idx++;
       break;
     case 'b':
-      squares[idx++] = Piece(Black, Bishop);
+      squares[idx] = new Piece(Black, Bishop, idx);
+      idx++;
       break;
     case 'q':
-      squares[idx++] = Piece(Black, Queen);
+      squares[idx] = new Piece(Black, Queen, idx);
+      idx++;
       break;
     case 'k':
-      squares[idx++] = Piece(Black, King);
+      squares[idx] = new Piece(Black, King, idx);
+      idx++;
       break;
     case 'p':
-      squares[idx++] = Piece(Black, Pawn);
+      squares[idx] = new Piece(Black, Pawn, idx);
+      idx++;
       break;
     case 'R':
-      squares[idx++] = Piece(White, Rook);
+      squares[idx] = new Piece(White, Rook, idx);
+      idx++;
       break;
     case 'N':
-      squares[idx++] = Piece(White, Knight);
+      squares[idx] = new Piece(White, Knight, idx);
+      idx++;
       break;
     case 'B':
-      squares[idx++] = Piece(White, Bishop);
+      squares[idx] = new Piece(White, Bishop, idx);
+      idx++;
       break;
     case 'Q':
-      squares[idx++] = Piece(White, Queen);
+      squares[idx] = new Piece(White, Queen, idx);
+      idx++;
       break;
     case 'K':
-      squares[idx++] = Piece(White, King);
+      squares[idx] = new Piece(White, King, idx);
+      idx++;
       break;
     case 'P':
-      squares[idx++] = Piece(White, Pawn);
+      squares[idx] = new Piece(White, Pawn, idx);
+      idx++;
       break;
     case '1' ... '8':
       int digit_value = fen[i] - '0'; // converts char to int
       while (space_counter < digit_value) {
-        squares[idx++] = Piece(NoColor, NoType);
+        squares[idx] = new Piece(NoColor, NoType, idx);
+        idx++;
         space_counter++;
       }
       space_counter = 0;
@@ -70,10 +87,37 @@ Piece *Board::GetBoardFromFEN(std::string fen) {
   return squares;
 }
 
-Piece *Board::get_squares() {
-  return this->squares_;
+std::vector<int> Board::GetPieceMovePositions(Piece &piece) {
+  std::vector<int> positions;
+  if (piece.IsColor(Black) && piece.IsType(Rook)) {
+    AddStraights(positions, piece.get_position());
+  } else if (piece.IsColor(Black) && piece.IsType(Knight)) {
+  } else if (piece.IsColor(Black) && piece.IsType(Bishop)) {
+  } else if (piece.IsColor(Black) && piece.IsType(Queen)) {
+  } else if (piece.IsColor(Black) && piece.IsType(King)) {
+  } else if (piece.IsColor(Black) && piece.IsType(Pawn)) {
+  } else if (piece.IsColor(White) && piece.IsType(Rook)) {
+  } else if (piece.IsColor(White) && piece.IsType(Knight)) {
+  } else if (piece.IsColor(White) && piece.IsType(Bishop)) {
+  } else if (piece.IsColor(White) && piece.IsType(Queen)) {
+  } else if (piece.IsColor(White) && piece.IsType(King)) {
+  } else if (piece.IsColor(White) && piece.IsType(Pawn)) {
+  }
 }
+
+Piece **Board::get_squares() { return this->squares_; }
+
+void Board::AddStraights(std::vector<int> &positions, int starting_position) {
+  // up
   
-void Board::set_squares(Piece *squares) {
-  this->squares_ = squares;
+
+  // down
+  
+  // left
+
+  // right
+}
+
+void Board::AddDiagonals(std::vector<int> &positions, int starting_position) {
+  
 }
