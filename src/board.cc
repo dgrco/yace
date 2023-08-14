@@ -1,4 +1,5 @@
 #include "../header/board.h"
+#include "../header/piece.h"
 #include <iostream>
 
 Board::Board() {
@@ -87,37 +88,71 @@ Piece **Board::GetBoardFromFEN(std::string fen) {
   return squares;
 }
 
-std::vector<int> Board::GetPieceMovePositions(Piece &piece) {
+std::vector<int> Board::GetPieceMovePositions(Piece *piece) {
   std::vector<int> positions;
-  if (piece.IsColor(Black) && piece.IsType(Rook)) {
-    AddStraights(positions, piece.get_position());
-  } else if (piece.IsColor(Black) && piece.IsType(Knight)) {
-  } else if (piece.IsColor(Black) && piece.IsType(Bishop)) {
-  } else if (piece.IsColor(Black) && piece.IsType(Queen)) {
-  } else if (piece.IsColor(Black) && piece.IsType(King)) {
-  } else if (piece.IsColor(Black) && piece.IsType(Pawn)) {
-  } else if (piece.IsColor(White) && piece.IsType(Rook)) {
-  } else if (piece.IsColor(White) && piece.IsType(Knight)) {
-  } else if (piece.IsColor(White) && piece.IsType(Bishop)) {
-  } else if (piece.IsColor(White) && piece.IsType(Queen)) {
-  } else if (piece.IsColor(White) && piece.IsType(King)) {
-  } else if (piece.IsColor(White) && piece.IsType(Pawn)) {
+  if (piece->IsColor(Black) && piece->IsType(Rook)) {
+    AddStraights(positions, piece->get_position());
+  } else if (piece->IsColor(Black) && piece->IsType(Knight)) {
+  } else if (piece->IsColor(Black) && piece->IsType(Bishop)) {
+  } else if (piece->IsColor(Black) && piece->IsType(Queen)) {
+  } else if (piece->IsColor(Black) && piece->IsType(King)) {
+  } else if (piece->IsColor(Black) && piece->IsType(Pawn)) {
+  } else if (piece->IsColor(White) && piece->IsType(Rook)) {
+  } else if (piece->IsColor(White) && piece->IsType(Knight)) {
+  } else if (piece->IsColor(White) && piece->IsType(Bishop)) {
+  } else if (piece->IsColor(White) && piece->IsType(Queen)) {
+  } else if (piece->IsColor(White) && piece->IsType(King)) {
+  } else if (piece->IsColor(White) && piece->IsType(Pawn)) {
   }
+
+  return positions;
 }
 
 Piece **Board::get_squares() { return this->squares_; }
 
 void Board::AddStraights(std::vector<int> &positions, int starting_position) {
-  // up
-  
+  int curr_pos = starting_position;
 
+  // up
+  while (curr_pos > 7) {
+    curr_pos -= 8;
+    positions.push_back(curr_pos);
+  }
+  
   // down
+  curr_pos = starting_position;
+  while (curr_pos < 56) {
+    curr_pos += 8;
+    positions.push_back(curr_pos);
+  }
   
   // left
+  curr_pos = starting_position;
+  while (curr_pos % 8 > 0) {
+    curr_pos -= 1;
+    positions.push_back(curr_pos);
+  }
 
   // right
+  curr_pos = starting_position;
+  while (curr_pos % 8 < 7) {
+    curr_pos += 1;
+    positions.push_back(curr_pos);
+  }
 }
 
 void Board::AddDiagonals(std::vector<int> &positions, int starting_position) {
   
+}
+
+void Board::Move(Piece *piece, int new_position) {
+  int old_position = piece->get_position();
+  Piece *empty_piece = new Piece(NoColor, NoType, old_position);
+  squares_[old_position] = empty_piece;
+  
+  // Handle taking of piece
+  delete GetPiece(new_position);
+
+  piece->set_position(new_position);
+  squares_[new_position] = piece;
 }

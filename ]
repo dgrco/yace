@@ -41,7 +41,8 @@ void InputHandler::Update(sf::RenderWindow &window, sf::Event &event,
       // selected piece to the square
       else if (avail_move_positions &&
                std::find(avail_move_positions->begin(),
-                         avail_move_positions->end(), piece->get_position()) !=
+                         avail_move_positions->end(),
+                         selected_piece->get_position()) !=
                    avail_move_positions->end()) {
         board.Move(selected_piece, piece->get_position());
       } else {

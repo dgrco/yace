@@ -8,6 +8,11 @@ BoardDisplay::BoardDisplay(Board &board) {
   DrawSquares();
 
   // Set up pieces
+  UpdateDisplayPieces(board);
+}
+
+void BoardDisplay::UpdateDisplayPieces(Board &board) {
+  pieces_.clear();
   for (int i = 0; i < 64; i++) {
     Piece *curr_piece = board.get_squares()[i];
     if (curr_piece->IsColor(Black) && curr_piece->IsType(Rook)) {
@@ -79,13 +84,32 @@ void BoardDisplay::DrawBoard(sf::RenderWindow &window) {
         .Draw(window, std::get<1>(piece_with_position));
   }
 }
-  
-void BoardDisplay::Highlight(sf::RenderWindow &window, int position) {
+
+void BoardDisplay::Highlight(sf::RenderWindow &window, Board &board,
+                             int position) {
   // Reset board
   DrawSquares();
 
-  // Highlight new color
+  // Highlight selected piece
   squares_[position]->setFillColor(sf::Color::Red);
+
+  // Highlight available moves
+  std::vector<int> avail_positions =
+      board.GetPieceMovePositions(board.GetPiece(position));
+
+  for (int pos : avail_positions) {
+    sf::CircleShape circle;
+    float rad = 15.0f;
+    circle.setRadius(rad);
+    // this looks confusing, but it just centers by microadjusting the position
+    // given the radius
+    circle.setPosition(pos % 8 * 100 + (100 - rad) / 2.0 - rad / 2,
+                       (pos / 8) * 100 + (100 - rad) / 2.0 - rad / 2);
+    circle.setFillColor(sf::Color::Magenta);
+    circle.setOutlineThickness(3);
+    circle.setOutlineColor(sf::Color::Black);
+    window.draw(circle);
+  }
 }
 
 BoardDisplay::~BoardDisplay() {

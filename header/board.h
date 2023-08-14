@@ -16,10 +16,11 @@ public:
   void SetPiece(int position, Piece *piece);
   Piece *GetPiece(int position);
   Piece **get_squares();
-  std::vector<int> GetPieceMovePositions(Piece &piece);
+  std::vector<int> GetPieceMovePositions(Piece *piece);
   // Returns an array of pieces/squares in ascending order starting from a0
   // given a FEN string
   Piece **GetBoardFromFEN(std::string fen);
+  void Move(Piece *piece, int new_position);
 };
 
 #endif

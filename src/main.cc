@@ -19,7 +19,7 @@ int main() {
       if (event.type == sf::Event::Closed)
         window.close();
     }
-   
+
     window.clear();
 
     // Draw squares and pieces
@@ -30,10 +30,11 @@ int main() {
 
     Piece *selected_piece = input.get_selected_piece();
     if (selected_piece && !selected_piece->IsType(NoType)) {
-      board_display.Highlight(window,
+      board_display.Highlight(window, board,
                               input.get_selected_piece()->get_position());
+      board_display.UpdateDisplayPieces(board);
     } else {
-      // clear the board if no selection
+      // clear the board if no piece is selected
       board_display.DrawSquares();
     }
 
