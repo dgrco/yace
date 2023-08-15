@@ -177,9 +177,10 @@ void Board::AddDiagonals(std::vector<int> &positions, int starting_position) {
   // top-right
   shortest_dist = std::min(7 - curr_pos % 8, curr_pos / 8);
   for (int i = 0; i < shortest_dist; i++) {
-    if (squares_[curr_pos]->IsColor(squares_[starting_position]->get_color())) {
+    if (squares_[curr_pos - 7]->IsColor(
+            squares_[starting_position]->get_color())) {
       break;
-    } else if (squares_[curr_pos]->IsColor(
+    } else if (squares_[curr_pos - 7]->IsColor(
                    squares_[starting_position]->get_opposite_color())) {
       positions.push_back(curr_pos - 7);
       break;
@@ -193,9 +194,10 @@ void Board::AddDiagonals(std::vector<int> &positions, int starting_position) {
   curr_pos = starting_position;
   shortest_dist = std::min(7 - curr_pos % 8, 7 - curr_pos / 8);
   for (int i = 0; i < shortest_dist; i++) {
-    if (squares_[curr_pos]->IsColor(squares_[starting_position]->get_color())) {
+    if (squares_[curr_pos + 9]->IsColor(
+            squares_[starting_position]->get_color())) {
       break;
-    } else if (squares_[curr_pos]->IsColor(
+    } else if (squares_[curr_pos + 9]->IsColor(
                    squares_[starting_position]->get_opposite_color())) {
       positions.push_back(curr_pos + 9);
       break;
@@ -208,9 +210,10 @@ void Board::AddDiagonals(std::vector<int> &positions, int starting_position) {
   curr_pos = starting_position;
   shortest_dist = std::min(curr_pos % 8, 7 - curr_pos / 8);
   for (int i = 0; i < shortest_dist; i++) {
-    if (squares_[curr_pos]->IsColor(squares_[starting_position]->get_color())) {
+    if (squares_[curr_pos + 7]->IsColor(
+            squares_[starting_position]->get_color())) {
       break;
-    } else if (squares_[curr_pos]->IsColor(
+    } else if (squares_[curr_pos + 7]->IsColor(
                    squares_[starting_position]->get_opposite_color())) {
       positions.push_back(curr_pos + 7);
       break;
@@ -224,9 +227,10 @@ void Board::AddDiagonals(std::vector<int> &positions, int starting_position) {
   curr_pos = starting_position;
   shortest_dist = std::min(curr_pos % 8, curr_pos / 8);
   for (int i = 0; i < shortest_dist; i++) {
-    if (squares_[curr_pos]->IsColor(squares_[starting_position]->get_color())) {
+    if (squares_[curr_pos - 9]->IsColor(
+            squares_[starting_position]->get_color())) {
       break;
-    } else if (squares_[curr_pos]->IsColor(
+    } else if (squares_[curr_pos - 9]->IsColor(
                    squares_[starting_position]->get_opposite_color())) {
       positions.push_back(curr_pos - 9);
       break;
