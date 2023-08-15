@@ -91,7 +91,7 @@ void BoardDisplay::Highlight(sf::RenderWindow &window, Board &board,
   DrawSquares();
 
   // Highlight selected piece
-  squares_[position]->setFillColor(sf::Color::Red);
+  squares_[position]->setFillColor(sf::Color(154, 154, 156, 255));
 
   // Highlight available moves
   std::vector<int> avail_positions =
@@ -105,7 +105,12 @@ void BoardDisplay::Highlight(sf::RenderWindow &window, Board &board,
     // given the radius
     circle.setPosition(pos % 8 * 100 + (100 - rad) / 2.0 - rad / 2,
                        (pos / 8) * 100 + (100 - rad) / 2.0 - rad / 2);
-    circle.setFillColor(sf::Color::Magenta);
+    if (board.GetPiece(pos)->IsColor(
+            board.GetPiece(position)->get_opposite_color())) {
+      circle.setFillColor(sf::Color::Blue);
+    } else {
+      circle.setFillColor(sf::Color::Magenta);
+    }
     circle.setOutlineThickness(3);
     circle.setOutlineColor(sf::Color::Black);
     window.draw(circle);

@@ -30,6 +30,8 @@ public:
   Piece(Color, Type, int);
   void set_position(int);
   int get_position();
+  Color get_color();
+  Color get_opposite_color();
   bool IsType(Type);
   bool IsColor(Color);
   int GetValue();

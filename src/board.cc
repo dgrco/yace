@@ -115,29 +115,57 @@ void Board::AddStraights(std::vector<int> &positions, int starting_position) {
   int curr_pos = starting_position;
 
   // up
-  while (curr_pos > 7) {
+  while (curr_pos > 7 && !squares_[curr_pos - 8]->IsColor(
+                             squares_[starting_position]->get_color())) {
+    if (squares_[curr_pos]->IsColor(
+            squares_[starting_position]->get_opposite_color())) {
+      break;
+    };
+
     curr_pos -= 8;
+
     positions.push_back(curr_pos);
   }
 
   // down
   curr_pos = starting_position;
-  while (curr_pos < 56) {
+  while (curr_pos < 56 && !squares_[curr_pos + 8]->IsColor(
+                              squares_[starting_position]->get_color())) {
+    if (squares_[curr_pos]->IsColor(
+            squares_[starting_position]->get_opposite_color())) {
+      break;
+    };
+
     curr_pos += 8;
+
     positions.push_back(curr_pos);
   }
 
   // left
   curr_pos = starting_position;
-  while (curr_pos % 8 > 0) {
+  while (curr_pos % 8 > 0 && !squares_[curr_pos - 1]->IsColor(
+                                 squares_[starting_position]->get_color())) {
+    if (squares_[curr_pos]->IsColor(
+            squares_[starting_position]->get_opposite_color())) {
+      break;
+    };
+
     curr_pos -= 1;
+
     positions.push_back(curr_pos);
   }
 
   // right
   curr_pos = starting_position;
-  while (curr_pos % 8 < 7) {
+  while (curr_pos % 8 < 7 && !squares_[curr_pos + 1]->IsColor(
+                                 squares_[starting_position]->get_color())) {
+    if (squares_[curr_pos]->IsColor(
+            squares_[starting_position]->get_opposite_color())) {
+      break;
+    };
+
     curr_pos += 1;
+
     positions.push_back(curr_pos);
   }
 }
@@ -149,6 +177,14 @@ void Board::AddDiagonals(std::vector<int> &positions, int starting_position) {
   // top-right
   shortest_dist = std::min(7 - curr_pos % 8, curr_pos / 8);
   for (int i = 0; i < shortest_dist; i++) {
+    if (squares_[curr_pos]->IsColor(squares_[starting_position]->get_color())) {
+      break;
+    } else if (squares_[curr_pos]->IsColor(
+                   squares_[starting_position]->get_opposite_color())) {
+      positions.push_back(curr_pos - 7);
+      break;
+    }
+
     curr_pos -= 7;
     positions.push_back(curr_pos);
   }
@@ -157,6 +193,13 @@ void Board::AddDiagonals(std::vector<int> &positions, int starting_position) {
   curr_pos = starting_position;
   shortest_dist = std::min(7 - curr_pos % 8, 7 - curr_pos / 8);
   for (int i = 0; i < shortest_dist; i++) {
+    if (squares_[curr_pos]->IsColor(squares_[starting_position]->get_color())) {
+      break;
+    } else if (squares_[curr_pos]->IsColor(
+                   squares_[starting_position]->get_opposite_color())) {
+      positions.push_back(curr_pos + 9);
+      break;
+    }
     curr_pos += 9;
     positions.push_back(curr_pos);
   }
@@ -165,6 +208,14 @@ void Board::AddDiagonals(std::vector<int> &positions, int starting_position) {
   curr_pos = starting_position;
   shortest_dist = std::min(curr_pos % 8, 7 - curr_pos / 8);
   for (int i = 0; i < shortest_dist; i++) {
+    if (squares_[curr_pos]->IsColor(squares_[starting_position]->get_color())) {
+      break;
+    } else if (squares_[curr_pos]->IsColor(
+                   squares_[starting_position]->get_opposite_color())) {
+      positions.push_back(curr_pos + 7);
+      break;
+    }
+
     curr_pos += 7;
     positions.push_back(curr_pos);
   }
@@ -173,6 +224,14 @@ void Board::AddDiagonals(std::vector<int> &positions, int starting_position) {
   curr_pos = starting_position;
   shortest_dist = std::min(curr_pos % 8, curr_pos / 8);
   for (int i = 0; i < shortest_dist; i++) {
+    if (squares_[curr_pos]->IsColor(squares_[starting_position]->get_color())) {
+      break;
+    } else if (squares_[curr_pos]->IsColor(
+                   squares_[starting_position]->get_opposite_color())) {
+      positions.push_back(curr_pos - 9);
+      break;
+    }
+
     curr_pos -= 9;
     positions.push_back(curr_pos);
   }
@@ -184,56 +243,110 @@ void Board::AddLs(std::vector<int> &positions, int starting_position) {
 
   if (rev_rank - 2 >= 0 && file + 1 < 8) {
     // up-up-right
-    positions.push_back(starting_position - 15);
+    if (!squares_[starting_position - 15]->IsColor(
+            squares_[starting_position]->get_color())) {
+      positions.push_back(starting_position - 15);
+    }
   }
   if (rev_rank - 1 >= 0 && file + 2 < 8) {
     // up-right-right
-    positions.push_back(starting_position - 6);
+    if (!squares_[starting_position - 6]->IsColor(
+            squares_[starting_position]->get_color())) {
+      positions.push_back(starting_position - 6);
+    }
   }
   if (rev_rank + 1 < 8 && file + 2 < 8) {
     // down-right-right
-    positions.push_back(starting_position + 10);
+    if (!squares_[starting_position + 10]->IsColor(
+            squares_[starting_position]->get_color())) {
+      positions.push_back(starting_position + 10);
+    }
   }
   if (rev_rank + 2 < 8 && file + 1 < 8) {
     // down-down-right
-    positions.push_back(starting_position + 17);
+    if (!squares_[starting_position + 17]->IsColor(
+            squares_[starting_position]->get_color())) {
+      positions.push_back(starting_position + 17);
+    }
   }
   if (rev_rank - 2 >= 0 && file - 1 >= 0) {
     // up-up-left
-    positions.push_back(starting_position - 17);
+    if (!squares_[starting_position - 17]->IsColor(
+            squares_[starting_position]->get_color())) {
+      positions.push_back(starting_position - 17);
+    }
   }
   if (rev_rank - 1 >= 0 && file - 2 >= 0) {
     // up-left-left
-    positions.push_back(starting_position - 10);
+    if (!squares_[starting_position - 10]->IsColor(
+            squares_[starting_position]->get_color())) {
+      positions.push_back(starting_position - 10);
+    }
   }
   if (rev_rank + 1 < 8 && file - 2 >= 0) {
     // down-left-left
-    positions.push_back(starting_position + 6);
+    if (!squares_[starting_position + 6]->IsColor(
+            squares_[starting_position]->get_color())) {
+      positions.push_back(starting_position + 6);
+    }
   }
   if (rev_rank + 2 < 8 && file - 1 >= 0) {
     // down-down-left
-    positions.push_back(starting_position + 15);
+    if (!squares_[starting_position + 15]->IsColor(
+            squares_[starting_position]->get_color())) {
+      positions.push_back(starting_position + 15);
+    }
   }
 }
 
 void Board::AddPawnMoves(std::vector<int> &positions, Piece *piece) {
   int rev_rank = piece->get_position() / 8;
+  int file = piece->get_position() % 8;
 
   if (piece->IsColor(Black)) {
-    if (rev_rank == 1) {
+    // regular moves
+    if (rev_rank == 1 &&
+        squares_[piece->get_position() + 16]->IsColor(NoColor) &&
+        squares_[piece->get_position() + 8]->IsColor(NoColor)) {
       positions.push_back(piece->get_position() + 16);
     }
 
-    if (rev_rank < 8) {
+    if (rev_rank + 1 < 8 &&
+        squares_[piece->get_position() + 8]->IsColor(NoColor)) {
       positions.push_back(piece->get_position() + 8);
     }
+
+    // captures
+    if (file - 1 >= 0 && rev_rank + 1 < 8 &&
+        squares_[piece->get_position() + 7]->IsColor(White)) {
+      positions.push_back(piece->get_position() + 7);
+    }
+
+    if (file + 1 < 8 && rev_rank + 1 < 8 &&
+        squares_[piece->get_position() + 9]->IsColor(White)) {
+      positions.push_back(piece->get_position() + 9);
+    }
   } else {
-    if (rev_rank == 6) {
+    // regular moves
+    if (rev_rank == 6 &&
+        squares_[piece->get_position() - 16]->IsColor(NoColor)) {
       positions.push_back(piece->get_position() - 16);
     }
 
-    if (rev_rank >= 0) {
+    if (rev_rank - 1 >= 0 &&
+        squares_[piece->get_position() - 8]->IsColor(NoColor)) {
       positions.push_back(piece->get_position() - 8);
+    }
+
+    // captures
+    if (file - 1 >= 0 && rev_rank - 1 >= 0 &&
+        squares_[piece->get_position() - 7]->IsColor(Black)) {
+      positions.push_back(piece->get_position() - 7);
+    }
+
+    if (file + 1 < 8 && rev_rank - 1 >= 0 &&
+        squares_[piece->get_position() - 9]->IsColor(Black)) {
+      positions.push_back(piece->get_position() - 9);
     }
   }
 }
@@ -243,42 +356,50 @@ void Board::AddKingMoves(std::vector<int> &positions, Piece *piece) {
   int file = piece->get_position() % 8;
 
   // up
-  if (rev_rank - 1 >= 0) {
+  if (rev_rank - 1 >= 0 &&
+      !squares_[piece->get_position() - 8]->IsColor(piece->get_color())) {
     positions.push_back(piece->get_position() - 8);
   }
 
   // up-right
-  if (rev_rank - 1 >= 0 && file + 1 < 8) {
+  if (rev_rank - 1 >= 0 && file + 1 < 8 &&
+      !squares_[piece->get_position() - 7]->IsColor(piece->get_color())) {
     positions.push_back(piece->get_position() - 7);
   }
 
   // right
-  if (file + 1 < 8) {
+  if (file + 1 < 8 &&
+      !squares_[piece->get_position() + 1]->IsColor(piece->get_color())) {
     positions.push_back(piece->get_position() + 1);
   }
 
   // down-right
-  if (rev_rank + 1 < 8 && file + 1 < 8) {
+  if (rev_rank + 1 < 8 && file + 1 < 8 &&
+      !squares_[piece->get_position() + 9]->IsColor(piece->get_color())) {
     positions.push_back(piece->get_position() + 9);
   }
 
   // down
-  if (rev_rank + 1 < 8) {
+  if (rev_rank + 1 < 8 &&
+      !squares_[piece->get_position() + 8]->IsColor(piece->get_color())) {
     positions.push_back(piece->get_position() + 8);
   }
 
   // down-left
-  if (rev_rank + 1 < 8 && file - 1 >= 0) {
+  if (rev_rank + 1 < 8 && file - 1 >= 0 &&
+      !squares_[piece->get_position() + 7]->IsColor(piece->get_color())) {
     positions.push_back(piece->get_position() + 7);
   }
 
   // left
-  if (file - 1 >= 0) {
+  if (file - 1 >= 0 &&
+      !squares_[piece->get_position() - 1]->IsColor(piece->get_color())) {
     positions.push_back(piece->get_position() - 1);
   }
 
   // top-left
-  if (rev_rank - 1 >= 0 && file - 1 >= 0) {
+  if (rev_rank - 1 >= 0 && file - 1 >= 0 &&
+      !squares_[piece->get_position() - 9]->IsColor(piece->get_color())) {
     positions.push_back(piece->get_position() - 9);
   }
 }
