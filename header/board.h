@@ -9,6 +9,9 @@ private:
                    // NA for both color and type)
   void AddStraights(std::vector<int> &positions, int starting_position);
   void AddDiagonals(std::vector<int> &positions, int starting_position);
+  void AddLs(std::vector<int> &positions, int starting_position);
+  void AddPawnMoves(std::vector<int> &positions, Piece *piece);
+  void AddKingMoves(std::vector<int> &positions, Piece *piece);
 
 public:
   Board();
