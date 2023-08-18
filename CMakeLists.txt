@@ -12,6 +12,9 @@ add_executable(${PROJECT_NAME}
   src/piece.cc
   src/piece_display.cc
   src/input_handler.cc
+  src/ai.cc
 )
 
 target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-system)
+
+target_compile_options(${PROJECT_NAME} PRIVATE -g)

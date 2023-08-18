@@ -12,10 +12,12 @@ private:
 
 public:
   InputHandler();
-  void Update(sf::RenderWindow &window, sf::Event &event, Board &board);
+  void Update(sf::RenderWindow &window, sf::Event &event, Board &board,
+              bool playing_as_white);
   Piece *get_selected_piece();
   bool get_click_locked();
   void set_click_locked(bool);
+  void ClearSelected();
 };
 
 #endif

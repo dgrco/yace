@@ -129,6 +129,30 @@ dev/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/build
 .PHONY : dev/fast
 
+src/ai.o: src/ai.cc.o
+.PHONY : src/ai.o
+
+# target to build an object file
+src/ai.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/ai.cc.o
+.PHONY : src/ai.cc.o
+
+src/ai.i: src/ai.cc.i
+.PHONY : src/ai.i
+
+# target to preprocess a source file
+src/ai.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/ai.cc.i
+.PHONY : src/ai.cc.i
+
+src/ai.s: src/ai.cc.s
+.PHONY : src/ai.s
+
+# target to generate assembly for a file
+src/ai.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dev.dir/build.make CMakeFiles/dev.dir/src/ai.cc.s
+.PHONY : src/ai.cc.s
+
 src/board.o: src/board.cc.o
 .PHONY : src/board.o
 
@@ -282,6 +306,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... dev"
+	@echo "... src/ai.o"
+	@echo "... src/ai.i"
+	@echo "... src/ai.s"
 	@echo "... src/board.o"
 	@echo "... src/board.i"
 	@echo "... src/board.s"

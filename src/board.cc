@@ -2,8 +2,11 @@
 #include "../header/piece.h"
 #include <algorithm>
 #include <iostream>
+#include <stack>
 
-Board::Board() {
+Board::Board(Color player_color) {
+  this->player_color = player_color;
+  player_to_move = player_color == White;
   squares_ = GetBoardFromFEN(
       "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
 }
@@ -333,7 +336,8 @@ void Board::AddPawnMoves(std::vector<int> &positions, Piece *piece) {
   } else {
     // regular moves
     if (rev_rank == 6 &&
-        squares_[piece->get_position() - 16]->IsColor(NoColor)) {
+        squares_[piece->get_position() - 16]->IsColor(NoColor) &&
+        squares_[piece->get_position() - 8]->IsColor(NoColor)) {
       positions.push_back(piece->get_position() - 16);
     }
 
@@ -344,13 +348,13 @@ void Board::AddPawnMoves(std::vector<int> &positions, Piece *piece) {
 
     // captures
     if (file - 1 >= 0 && rev_rank - 1 >= 0 &&
-        squares_[piece->get_position() - 7]->IsColor(Black)) {
-      positions.push_back(piece->get_position() - 7);
+        squares_[piece->get_position() - 9]->IsColor(Black)) {
+      positions.push_back(piece->get_position() - 9);
     }
 
     if (file + 1 < 8 && rev_rank - 1 >= 0 &&
-        squares_[piece->get_position() - 9]->IsColor(Black)) {
-      positions.push_back(piece->get_position() - 9);
+        squares_[piece->get_position() - 7]->IsColor(Black)) {
+      positions.push_back(piece->get_position() - 7);
     }
   }
 }
@@ -408,14 +412,111 @@ void Board::AddKingMoves(std::vector<int> &positions, Piece *piece) {
   }
 }
 
-void Board::Move(Piece *piece, int new_position) {
+bool Board::is_player_to_move() { return player_to_move; }
+
+void Board::set_player_to_move(bool to_move) { player_to_move = to_move; }
+
+void Board::SimMove(Piece *piece, int new_position) {
   int old_position = piece->get_position();
   Piece *empty_piece = new Piece(NoColor, NoType, old_position);
   squares_[old_position] = empty_piece;
+
+  taken_piece_buffer.push(squares_[new_position]);
+  piece->set_position(new_position);
+  squares_[new_position] = piece;
+}
+
+void Board::UndoMove(Piece *piece, int old_position) {
+  delete squares_[old_position];
+  piece->set_position(old_position);
+  squares_[old_position] = piece;
+  Piece *old_replaced_piece = taken_piece_buffer.top();
+  squares_[old_replaced_piece->get_position()] = old_replaced_piece;
+  taken_piece_buffer.pop();
+}
+
+void Board::MakeMove(Piece *piece, int new_position) {
+  int old_position = piece->get_position();
+  Piece *empty_piece = new Piece(NoColor, NoType, old_position);
+  squares_[old_position] = empty_piece;
+
+  // Set player move state (if player made move, lock further moves until ready)
+  if (piece->IsColor(player_color)) {
+    player_to_move = false;
+  } else {
+    player_to_move = true;
+  }
 
   // Handle taking of piece
   delete GetPiece(new_position);
 
   piece->set_position(new_position);
   squares_[new_position] = piece;
+}
+
+// meant for debugging board moves visually
+void Board::print_fen() {
+  std::string fen;
+  int counter = 0;
+  for (int i = 0; i < 64; i++) {
+    if (i != 0 && i % 8 == 0)
+      std::cout << "/";
+
+    if (GetPiece(i)->IsType(NoType)) {
+      if (i % 8 == 7) {
+        std::cout << ++counter;
+        counter = 0;
+        continue;
+      }
+
+      counter++;
+      continue;
+    }
+
+    if (counter > 0) {
+      std::cout << counter;
+      counter = 0;
+    }
+
+    switch (GetPiece(i)->GetValue()) {
+    case 9:
+      std::cout << "p";
+      break;
+    case 10:
+      std::cout << "n";
+      break;
+    case 11:
+      std::cout << "b";
+      break;
+    case 12:
+      std::cout << "r";
+      break;
+    case 13:
+      std::cout << "k";
+      break;
+    case 14:
+      std::cout << "q";
+      break;
+    case 17:
+      std::cout << "P";
+      break;
+    case 18:
+      std::cout << "N";
+      break;
+    case 19:
+      std::cout << "B";
+      break;
+    case 20:
+      std::cout << "R";
+      break;
+    case 21:
+      std::cout << "K";
+      break;
+    case 22:
+      std::cout << "Q";
+      break;
+    }
+  }
+
+  std::cout << " w KQkq - 0 1" << std::endl << std::endl;
 }

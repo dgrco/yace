@@ -11,7 +11,7 @@ InputHandler::InputHandler() {
 }
 
 void InputHandler::Update(sf::RenderWindow &window, sf::Event &event,
-                          Board &board) {
+                          Board &board, bool playing_as_white) {
   std::vector<int> *avail_move_positions = nullptr;
 
   if (selected_piece) {
@@ -39,13 +39,16 @@ void InputHandler::Update(sf::RenderWindow &window, sf::Event &event,
       }
       // if the selected square is in the available move positions, move the
       // selected piece to the square
-      else if (avail_move_positions &&
+      else if (avail_move_positions && board.is_player_to_move() && 
                std::find(avail_move_positions->begin(),
                          avail_move_positions->end(), piece->get_position()) !=
                    avail_move_positions->end()) {
-        board.Move(selected_piece, piece->get_position());
+        board.MakeMove(selected_piece, piece->get_position());
       } else {
-        selected_piece = piece;
+        if (piece->IsColor(playing_as_white ? White : Black) &&
+            board.is_player_to_move()) {
+          selected_piece = piece;
+        } 
       }
     }
   } else {
@@ -62,3 +65,7 @@ Piece *InputHandler::get_selected_piece() { return selected_piece; }
 bool InputHandler::get_click_locked() { return click_locked; }
 
 void InputHandler::set_click_locked(bool locked) { click_locked = locked; }
+
+void InputHandler::ClearSelected() {
+  selected_piece = nullptr;
+}

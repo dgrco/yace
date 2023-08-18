@@ -6,9 +6,6 @@
 BoardDisplay::BoardDisplay(Board &board) {
   // Set up squares
   DrawSquares();
-
-  // Set up pieces
-  UpdateDisplayPieces(board);
 }
 
 void BoardDisplay::UpdateDisplayPieces(Board &board) {
@@ -72,7 +69,7 @@ void BoardDisplay::DrawSquares() {
   }
 }
 
-void BoardDisplay::DrawBoard(sf::RenderWindow &window) {
+void BoardDisplay::DrawBoard(sf::RenderWindow &window, Board &board) {
   for (int i = 0; i < 64; i++) {
     // Draw each square
     window.draw(*squares_[i]);
