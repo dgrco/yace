@@ -49,18 +49,39 @@ int Search(Board &board, int depth, bool maximizing) {
   }
 }
 
+int get_piece_score(Piece *piece) {
+  switch (piece->GetValue() & 0b00111) { // check each piece type
+    case Pawn:
+      return 1;
+    case Bishop:
+      return 3;
+    case Knight:
+      return 3;
+    case Rook:
+      return 5;
+    case Queen:
+      return 9;
+    case King:
+      return INT_MAX;
+    default:
+      return 0;
+  }
+}
+
+
 int evaluate(Board &board) {
-  int num_black_pieces = 0;
-  int num_white_pieces = 0;
+  int white_score = 0;
+  int black_score = 0;
 
   for (int i = 0; i < 64; i++) {
-    if (board.GetPiece(i)->IsColor(Black))
-      num_black_pieces++;
-    else if (board.GetPiece(i)->IsColor(White))
-      num_white_pieces++;
+    Piece *piece = board.GetPiece(i);
+    if (piece->IsColor(Black)) 
+      black_score += get_piece_score(piece);
+    else if (piece->IsColor(White))
+      white_score += get_piece_score(piece);
   }
 
-  return num_white_pieces - num_black_pieces;
+  return white_score - black_score;
 }
 
 std::tuple<Piece *, int> GetBestMove(Board &board, int depth, bool white_to_move) {

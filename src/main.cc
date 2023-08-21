@@ -10,7 +10,7 @@
 
 std::string file_to_str(int file) {
   switch (file) {
-  case 0:;
+  case 0:
     return "a";
   case 1:
     return "b";
@@ -74,6 +74,12 @@ int main() {
 
       window.clear();
 
+      if (!board.is_player_to_move()) {
+        auto best_move = AI::GetBestMove(board, 4, false);
+        board.MakeMove(std::get<0>(best_move), std::get<1>(best_move));
+        board.set_player_to_move(true);
+        input.ClearSelected();
+      }
       // Handle input
       input.Update(window, event, board, play_as_white);
 
@@ -89,13 +95,6 @@ int main() {
       } else {
         // clear the board if no piece is selected
         board_display.DrawSquares();
-      }
-
-      if (!board.is_player_to_move()) {
-        auto best_move = AI::GetBestMove(board, 4, false);
-        board.MakeMove(std::get<0>(best_move), std::get<1>(best_move));
-        board.set_player_to_move(true);
-        input.ClearSelected();
       }
 
       window.display();
