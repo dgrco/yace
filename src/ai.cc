@@ -119,14 +119,17 @@ float evaluate(Board &board) {
     } else if (piece->IsType(Pawn)) {
       if (piece->IsColor(White)) {
         P++;
-        if (piece->get_position() > 15 && piece->get_position() < 48) {
+        if (piece->get_position() / 8 < 6 && piece->get_position() / 8 > 1
+            && piece->get_position() % 8 < 6 && piece->get_position() % 8 > 1) {
           whiteMiddle++;
         }
       } else {
         p++;
-        if (piece->get_position() > 15 && piece->get_position() < 48) {
+        if (piece->get_position() / 8 < 6 && piece->get_position() / 8 > 1
+            && piece->get_position() % 8 < 6 && piece->get_position() % 8 > 1) {
           blackMiddle++;
         }
+
       }
     }
   }
