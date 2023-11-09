@@ -1,0 +1,44 @@
+[
+{
+  "directory": "/home/dg/dev/chess_engine",
+  "command": "/usr/bin/c++   -g -g -o CMakeFiles/dev.dir/src/main.cc.o -c /home/dg/dev/chess_engine/src/main.cc",
+  "file": "/home/dg/dev/chess_engine/src/main.cc",
+  "output": "CMakeFiles/dev.dir/src/main.cc.o"
+},
+{
+  "directory": "/home/dg/dev/chess_engine",
+  "command": "/usr/bin/c++   -g -g -o CMakeFiles/dev.dir/src/board_display.cc.o -c /home/dg/dev/chess_engine/src/board_display.cc",
+  "file": "/home/dg/dev/chess_engine/src/board_display.cc",
+  "output": "CMakeFiles/dev.dir/src/board_display.cc.o"
+},
+{
+  "directory": "/home/dg/dev/chess_engine",
+  "command": "/usr/bin/c++   -g -g -o CMakeFiles/dev.dir/src/board.cc.o -c /home/dg/dev/chess_engine/src/board.cc",
+  "file": "/home/dg/dev/chess_engine/src/board.cc",
+  "output": "CMakeFiles/dev.dir/src/board.cc.o"
+},
+{
+  "directory": "/home/dg/dev/chess_engine",
+  "command": "/usr/bin/c++   -g -g -o CMakeFiles/dev.dir/src/piece.cc.o -c /home/dg/dev/chess_engine/src/piece.cc",
+  "file": "/home/dg/dev/chess_engine/src/piece.cc",
+  "output": "CMakeFiles/dev.dir/src/piece.cc.o"
+},
+{
+  "directory": "/home/dg/dev/chess_engine",
+  "command": "/usr/bin/c++   -g -g -o CMakeFiles/dev.dir/src/piece_display.cc.o -c /home/dg/dev/chess_engine/src/piece_display.cc",
+  "file": "/home/dg/dev/chess_engine/src/piece_display.cc",
+  "output": "CMakeFiles/dev.dir/src/piece_display.cc.o"
+},
+{
+  "directory": "/home/dg/dev/chess_engine",
+  "command": "/usr/bin/c++   -g -g -o CMakeFiles/dev.dir/src/input_handler.cc.o -c /home/dg/dev/chess_engine/src/input_handler.cc",
+  "file": "/home/dg/dev/chess_engine/src/input_handler.cc",
+  "output": "CMakeFiles/dev.dir/src/input_handler.cc.o"
+},
+{
+  "directory": "/home/dg/dev/chess_engine",
+  "command": "/usr/bin/c++   -g -g -o CMakeFiles/dev.dir/src/ai.cc.o -c /home/dg/dev/chess_engine/src/ai.cc",
+  "file": "/home/dg/dev/chess_engine/src/ai.cc",
+  "output": "CMakeFiles/dev.dir/src/ai.cc.o"
+}
+]
